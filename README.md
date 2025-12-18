@@ -57,73 +57,38 @@ HERE I USED THE GITHUB URL= https://www.github.com/
 │ Structured Result │
 │ (Markdown file)   │
 └───────────────────┘
-
-What the company does
-
-Products or services offered
-
-Brand positioning or uniqueness
-
-Public policies (if available)
-
-The entire solution was built to fit within a one-day scope, using only public data, without requiring logins or paid APIs.
-
+--------------
 Architecture
+--------------
+The system follows a simple, modular pipeline:
 
-The project is organized into three simple components:
-
-scraper.py:
-Responsible for fetching public web pages, extracting visible text, and identifying relevant internal links.
-
-main.py:
-Acts as the controller for the pipeline. It coordinates scraping, groups pages into categories (home, about, products, policies), and sends the collected content to the summarizer.
-
-summarizer.py:
-It cleans and filters the extracted text, applies rule-based heuristics to identify company-level information, and generates a structured Markdown output (output.md).
-
+1.scraper.py – Fetches public web pages, extracts visible text, and discovers relevant internal links.
+2.main.py – Orchestrates the workflow, classifies pages (home, about, products, policies), and coordinates the pipeline.
+3.summarizer.py – Cleans text, applies rule-based heuristics, and generates a structured Markdown output (output.md).
+--------------
 Approach
+--------------
+Accepts a company website URL as input and Scrapes the homepage and a limited set of relevant internal pages,Classifies pages using URL patterns
 
-The agent takes a company website URL as input.
+Applies rule based summarization to extract organization-level information
 
-It scrapes the homepage along with a limited number of relevant internal pages.
+Outputs a structured Markdown summary
 
-Pages are categorized based on their purpose using simple URL patterns.
+This approach keeps the system deterministic, easy to understand, and extensible.
+--------------
+Assumptions
+--------------
+Company information is publicly accessible without authentication
 
-A rule based summarization approach extracts organizational level of  information.
+Relevant pages can be identified using URL patterns and keywords
 
-The final result is written as a structured Markdown summary.
+A rule-based approach is sufficient within the given time constraints
+---------------
+Limitations
+---------------
+1.Heuristic summarization may reflect mission statements for documentation heavy websites
+2.Semantic understanding is limited compared to LLM-based approaches
+3.JavaScript-heavy websites may expose less content through HTML scraping
 
-This approach keeps the system easy to understand, deterministic, and extendable.
-
-Limitations:
-The summarizer relies on heuristics, so for large or documentation-heavy websites, the overview may reflect mission statements or initiatives rather than a concise business description.
-
-Semantic understanding is limited compared to LLM-based solutions.
-
-JavaScript heavy websites may expose less content through basic HTML scraping.
-
-Future Improvements
-
-With additional time, the following improvements could be made:
-
-Integrating an LLM-based summarizer for better semantic understanding.
-
-Using browser automation tools such as Playwright or Selenium for dynamic websites.
-
-Improving page classification using NLP-based techniques instead of URL patterns.
-
-Constraints Compliance
-
-This solution fully respects the given constraints:
-
-Only publicly available data is used
-
-No authentication or login is required
-
-No paid APIs are involved
-
-The task was completed within one working day
-
-Output
 
 The agent generates a structured Markdown report (output.md) containing the summarized company information.
