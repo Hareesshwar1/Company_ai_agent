@@ -1,0 +1,12 @@
+requests
+beautifulsoup4
+
+No hardcoded company names
+
+No API keys
+
+No unused libraries
+
+Clean function names
+
+Comments explain intent, not obvious code
